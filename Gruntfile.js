@@ -549,7 +549,9 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'delta' ] );
+  // Before run grunt watch, run grunt build first.
+  // But build task couldn't be put inside of watch alisa task. If doing so, will not get karma:unit output
+  grunt.registerTask( 'watch', [ 'karma:unit:start', 'delta' ] );
 
   /**
    * The default task is to build and compile.
